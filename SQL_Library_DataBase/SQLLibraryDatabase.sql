@@ -1,4 +1,4 @@
-
+EXEC [dbo].[Tech_Academy_Library]
 
 CREATE DATABASE Tech_Academy_Library
 Use Tech_Academy_Library
@@ -14,7 +14,7 @@ BranchName VARCHAR(50) NOT NULL,
 Address VARCHAR(50) NOT NULL
 );
 
-SELECT * FROM tbl_Library_Branch
+
 
 /* CARDNUMBERS START AT 300 */
 CREATE TABLE tbl_Borrower (
@@ -24,7 +24,7 @@ Address VARCHAR(50) NOT NULL,
 Phone VARCHAR(12) NOT NULL,
 );
 
-SELECT * FROM tbl_Borrower
+
 
 
 CREATE TABLE tbl_Publisher (
@@ -35,7 +35,7 @@ Phone VARCHAR(12) NOT NULL,
 
 /* BOOK IDs START AT 5000 */
 CREATE TABLE tbl_Books (
-BookID INT PRIMARY KEY NOT NULL IDENTITY (5000,1),
+BookID INT PRIMARY KEY NOT NULL IDENTITY (5001,1),
 Title VARCHAR (30) NOT NULL,
 PublisherName VARCHAR(20) NOT NULL CONSTRAINT fk_PublisherNAME FOREIGN KEY REFERENCES tbl_Publisher(PublisherName) ON UPDATE CASCADE ON DELETE CASCADE,
 );
@@ -47,9 +47,6 @@ BranchID INT NOT NULL CONSTRAINT fk_BranchID2 FOREIGN KEY REFERENCES tbl_Library
 Number_Of_Copies INT NOT NULL
 );
 
-SELECT * FROM tbl_Book_Copies
-
-
 
 
 CREATE TABLE tbl_Book_Loans (
@@ -60,8 +57,6 @@ DateOut DATE NOT NULL,
 DateDue DATE NOT NULL
 );
 
-SELECT * FROM tbl_Book_Loans
-
 
 
 
@@ -70,7 +65,7 @@ BookID INT NOT NULL CONSTRAINT fk_BookID3 FOREIGN KEY REFERENCES tbl_Books(BookI
 AuthorName VARCHAR(40) NOT NULL
 );
 
-END
+
 
 
 /*END MAIN PROCEDURE */
@@ -89,6 +84,30 @@ VALUES
 ;
 
 SELECT * FROM tbl_Library_Branch
+
+
+INSERT INTO tbl_Borrower
+(Name, Address, Phone)
+VALUES
+('James Haven', '432 Johnstown Rd.', '4890234091'), 
+('Jimmy Haven','433 Jamestown Rd.','3829280912'),
+('John Haven', '431 Jimstown Rd.', '9430193290'),
+('Jeff Stevens', '99 UltraBall Lane', '9012348952'),
+('Loui Loi', '32 Loi Loui Rd.', '9021234592'),
+('Jessie Ray', '489 Sawyers Ave.', '8900989083'),
+('Steve John','123 Forest Ave.','3899823476'),
+('Carrie Louis','8920 Storm Drive','3217839021'),
+('Jason Kim','702 Audio Rd.','4839200192'),
+('Terry Evans','710 Dillsburg St.','4213213214'),
+('Bob Ross','610 StoneCold Lane','7109348902'),
+('Julia Storm','82 Huffington St.','7829046781'),
+('Andrea Heff','813 SumneyTown Pike','4389020000'),
+('Tori Style','308 Dragon St.','3213214390'), 
+('Jane Lek', '839 Mud Ave.', '1233333321')
+;
+
+SELECT * FROM tbl_Borrower
+
 
 INSERT INTO tbl_Publisher
 (PublisherName, Address, Phone)
@@ -136,32 +155,6 @@ VALUES
 SELECT * FROM tbl_Books
 
 
-INSERT INTO tbl_Book_Authors
-(BookID, AuthorName)
-VALUES
-(5001,'Mark Lee'),
-(5002,'Stephen King'),
-(5003,'Stephen King'),
-(5004,'Rick Riordan'),
-(5005,'Rick Riordan'),
-(5006,'Samuel Jane'),
-(5007,'Jenn Maze'),
-(5008,'Larry Kuz'),
-(5009,'Samuel Jane'),
-(5010,'Dennis Kade'),
-(5011,'Dennis Kade'),
-(5012,'Dennis Kade'),
-(5013,'Jordan Smith'),
-(5014,'Jordan Smith'),
-(5015,'Dale Johnson'),
-(5016,'Eric Weaver'),
-(5017,'Eric Weaver'),
-(5018,'Stephen James'),
-(5019,'Dennis Kade'),
-(5020,'Jules Lek')
-;
-
-SELECT * FROM tbl_Book_Authors
 
 
 INSERT INTO tbl_Book_Copies 
@@ -292,27 +285,33 @@ VALUES
 
 SELECT * FROM tbl_Book_Loans
 
-INSERT INTO tbl_Borrower
-(Name, Address, Phone)
+INSERT INTO tbl_Book_Authors
+(BookID, AuthorName)
 VALUES
-('James Haven', '432 Johnstown Rd.', '4890234091'), 
-('Jimmy Haven','433 Jamestown Rd.','3829280912'),
-('John Haven', '431 Jimstown Rd.', '9430193290'),
-('Jeff Stevens', '99 UltraBall Lane', '9012348952'),
-('Loui Loi', '32 Loi Loui Rd.', '9021234592'),
-('Jessie Ray', '489 Sawyers Ave.', '8900989083'),
-('Steve John','123 Forest Ave.','3899823476'),
-('Carrie Louis','8920 Storm Drive','3217839021'),
-('Jason Kim','702 Audio Rd.','4839200192'),
-('Terry Evans','710 Dillsburg St.','4213213214'),
-('Bob Ross','610 StoneCold Lane','7109348902'),
-('Julia Storm','82 Huffington St.','7829046781'),
-('Andrea Heff','813 SumneyTown Pike','4389020000'),
-('Tori Style','308 Dragon St.','3213214390'), 
-('Jane Lek', '839 Mud Ave.', '1233333321')
+(5001,'Mark Lee'),
+(5002,'Stephen King'),
+(5003,'Stephen King'),
+(5004,'Rick Riordan'),
+(5005,'Rick Riordan'),
+(5006,'Samuel Jane'),
+(5007,'Jenn Maze'),
+(5008,'Larry Kuz'),
+(5009,'Samuel Jane'),
+(5010,'Dennis Kade'),
+(5011,'Dennis Kade'),
+(5012,'Dennis Kade'),
+(5013,'Jordan Smith'),
+(5014,'Jordan Smith'),
+(5015,'Dale Johnson'),
+(5016,'Eric Weaver'),
+(5017,'Eric Weaver'),
+(5018,'Stephen James'),
+(5019,'Dennis Kade'),
+(5020,'Jules Lek')
 ;
 
-SELECT * FROM tbl_Borrower
+SELECT * FROM tbl_Book_Authors
+
 END
 /* =============================
 END INSERT LIBRARY DATA
