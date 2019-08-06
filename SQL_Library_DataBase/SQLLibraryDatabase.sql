@@ -1,11 +1,12 @@
-USE TechLibrary
-Go
+
+
+CREATE DATABASE Tech_Academy_Library
+Use Tech_Academy_Library
+
+/* MAIN PROCEDURE */
 CREATE PROCEDURE Tech_Academy_Library
 AS
 BEGIN
-
-CREATE DATABASE Tech_Academy_Library
-
 
 CREATE TABLE tbl_Library_Branch (
 BranchID INT PRIMARY KEY NOT NULL IDENTITY(1, 1),
@@ -68,6 +69,11 @@ CREATE TABLE tbl_Book_Authors (
 BookID INT NOT NULL CONSTRAINT fk_BookID3 FOREIGN KEY REFERENCES tbl_Books(BookID) ON UPDATE CASCADE ON DELETE CASCADE,
 AuthorName VARCHAR(40) NOT NULL
 );
+
+END
+
+
+/*END MAIN PROCEDURE */
 
 /* ==================
 DATA FOR THE TABLES 
@@ -315,6 +321,7 @@ BEGIN REQUESTED QUERIES
 
 
 /* QUERY ONE */
+
 CREATE PROCEDURE QUERY_ONE
 AS 
 BEGIN
@@ -327,7 +334,12 @@ WHERE
 Title = 'The Lost Tribe' AND BranchName =  'Sharpstown'
 ;
 END
+
+
+
+
 /*QUERY TWO */
+
 CREATE PROCEDURE QUERY_TWO
 AS 
 BEGIN
@@ -340,6 +352,10 @@ WHERE
 Title = 'The Lost Tribe'
 ;
 END
+
+
+
+
 /*QUERY THREE */
 CREATE PROCEDURE QUERY_THREE
 AS 
@@ -350,6 +366,11 @@ tbl_Borrower a1
 FULL OUTER JOIN tbl_Book_Loans a2 ON a2.CardNo = a1.CardNo
 WHERE BookID IS NULL;
 END
+
+
+
+
+
 /*QUERY FOUR */
 
 CREATE PROCEDURE QUERY_FOUR
@@ -364,6 +385,11 @@ INNER JOIN tbl_Borrower a4 ON a4.CardNo = a2.CardNo
 WHERE BranchName =  'Sharpstown' AND DATEDIFF(day, a2.DateDue, GETDATE()) = 0
 ;
 END
+
+
+
+
+
 /* QUERY FIVE */
 CREATE PROCEDURE QUERY_FIVE
 AS 
@@ -374,6 +400,10 @@ tbl_Library_Branch a1
 INNER JOIN tbl_Book_Loans a2 ON a2.BranchID = a1.BranchID
 GROUP BY BranchName;
 END
+
+
+
+
 /*QUERY SIX */
 CREATE PROCEDURE QUERY_SIX
 AS 
@@ -386,6 +416,10 @@ GROUP BY a1.Name, a1.Address
 HAVING COUNT(a2.BookID) >= 5
 ;
 END
+
+
+
+
 /*QUERY SEVEN */
 CREATE PROCEDURE QUERY_SEVEN
 AS 
